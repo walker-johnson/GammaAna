@@ -1,0 +1,31 @@
+#!/bin/bash
+
+N=0
+file="macro.mac"
+neutrons=100000
+
+while [ $N -le 15 ]
+do
+    echo "Run $N starting..."
+
+    echo "/run/useMaximumLogicalCores" >| $file
+    echo "/control/execute analysis.mac" >> $file
+    echo "/analysis/setFileName gammaAnalysis_$N" >> $file
+
+    Pos=$((${N} * 2))
+    ((Pos=Pos-15))
+    
+    echo "/testhadr/det/setGammaDetPos ${Pos} cm" >> $file
+    echo "/run/initialize" >> $file
+    echo "/run/beamOn ${neutrons}" >> $file
+
+    Monitor ${file}
+    
+    mv gammaAnalysis_${N}.root gammaAnalysis_${N}_a.root
+    
+    hadd gammaAnalysis_${N}.root gammaAnalysis_${N}_*.root
+    #rm -rf gammaAnalysis_${N}_*.root
+    
+    ((N=N+1))
+done
+    
