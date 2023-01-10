@@ -138,8 +138,8 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
   //Gamma passing through boundary
   if(particleName == "gamma" && post->GetStepStatus() == fGeomBoundary) {
 
-    //gamma entering gamma counter from poly
-    if(preLogical == fDetector->polyL && postLogical == fDetector->gammaDetL){
+    //gamma entering gamma counter from gammaShield
+    if(preLogical == fDetector->gammaShieldL && postLogical == fDetector->gammaDetL){
       G4AnalysisManager::Instance()->FillNtupleDColumn(5,0,x/1000); //ID, column,value
       G4AnalysisManager::Instance()->FillNtupleDColumn(5,1,y/1000); //ID, column,value
       G4AnalysisManager::Instance()->FillNtupleDColumn(5,2,z/1000); //ID, column,value

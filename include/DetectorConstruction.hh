@@ -108,6 +108,11 @@ public:
   G4VPhysicalVolume* gammaDetBoxP;
   G4LogicalVolume* gammaDetL;
   G4VPhysicalVolume* gammaDetP;
+  
+  G4LogicalVolume* gammaShieldL;
+  G4VPhysicalVolume* gammaShieldP;
+  
+  
 
   
 

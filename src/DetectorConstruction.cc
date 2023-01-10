@@ -510,6 +510,26 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
 				false,
 				0,
 				checkOverlaps);
+
+  G4Box* gammaShieldS = new G4Box("gammaShield",
+				  gammaBoxX/2-leadThickness,
+				  leadThickness/2,
+				  gammaBoxZ/2-leadThickness);
+  
+  gammaShieldL = new G4LogicalVolume(gammaShieldS,
+				     lead,
+				     "gammaShield");
+
+  gammaShieldP = new G4PVPlacement(0,
+				   G4ThreeVector(0, -gammaBoxY/2+leadThickness, 0),
+				   gammaShieldL,
+				   "gammaShield",
+				   gammaDetL,
+				   false,
+				   0,
+				   checkOverlaps);
+				  
+				  
   
 		      
   //always return the root volume
